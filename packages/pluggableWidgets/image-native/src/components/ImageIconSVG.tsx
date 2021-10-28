@@ -5,10 +5,11 @@ import FastImageComponent, { Source } from "react-native-fast-image";
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
 import { CustomImageProps, GlyphIcon } from "../utils/imageUtils";
 import { GlyphIcon as GlyphIconComponent } from "./fonts/font";
+import { ResizeModeEnum } from "../../typings/ImageProps";
 
 export interface DimensionsType {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     aspectRatio?: number;
 }
 
@@ -18,6 +19,7 @@ interface ImageIconSVGProps {
     name?: string;
     dimensions?: DimensionsType;
     initialDimensions?: DimensionsType;
+    resizeMode?: ResizeModeEnum;
     styles: any;
 }
 
@@ -41,7 +43,7 @@ const excludedImageStyles = [
 ];
 
 export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
-    const { type, image, dimensions, initialDimensions, styles, name } = props;
+    const { type, image, dimensions, initialDimensions, resizeMode, styles, name } = props;
     // const [iconProps] = extractStyles(styles, ["size", "color"]);
     const [svgProps, svgStyles] = extractStyles(styles, ["width", "height"]);
     const [, imageStyles] = extractStyles(styles, excludedImageStyles);
@@ -68,6 +70,7 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
             <FastImageComponent
                 testID={`${name}$Image`} // Broken because of https://github.com/DylanVann/react-native-fast-image/issues/221
                 source={image as Source | number}
+                resizeMode={resizeMode}
                 style={{
                     width: dimensions?.width,
                     height: dimensions?.height,

@@ -8,6 +8,12 @@ import { ActionValue, DynamicValue, NativeIcon, NativeImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
 
+export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
+
+export type WidthUnitEnum = "auto" | "points";
+
+export type HeightUnitEnum = "auto" | "points";
+
 export type OnClickTypeEnum = "action" | "enlarge";
 
 export interface ImageProps<Style> {
@@ -18,10 +24,16 @@ export interface ImageProps<Style> {
     defaultImageDynamic?: DynamicValue<NativeImage>;
     imageUrl?: DynamicValue<string>;
     imageIcon?: DynamicValue<NativeIcon>;
-    onClickType: OnClickTypeEnum;
-    onClick?: ActionValue;
     isBackgroundImage: boolean;
     children?: ReactNode;
+    resizeMode: ResizeModeEnum;
+    opacity: number;
+    widthUnit: WidthUnitEnum;
+    customWidth: number;
+    heightUnit: HeightUnitEnum;
+    customHeight: number;
+    onClickType: OnClickTypeEnum;
+    onClick?: ActionValue;
 }
 
 export interface ImagePreviewProps {
@@ -32,8 +44,14 @@ export interface ImagePreviewProps {
     defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     imageUrl: string;
     imageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    onClickType: OnClickTypeEnum;
-    onClick: {} | null;
     isBackgroundImage: boolean;
     children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    resizeMode: ResizeModeEnum;
+    opacity: number | null;
+    widthUnit: WidthUnitEnum;
+    customWidth: number | null;
+    heightUnit: HeightUnitEnum;
+    customHeight: number | null;
+    onClickType: OnClickTypeEnum;
+    onClick: {} | null;
 }

@@ -32,35 +32,73 @@
                     <caption>Icon</caption>
                     <description>The icon image.</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Events">
-                <property key="onClickType" type="enumeration" defaultValue="action">
-                    <caption>On click type</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="action">Action</enumerationValue>
-                        <enumerationValue key="enlarge">Enlarge</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="onClick" type="action" required="false">
-                    <caption>On click</caption>
-                    <description/>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Background">
                 <property key="isBackgroundImage" type="boolean" defaultValue="false">
-                    <caption>Background image</caption>
+                    <caption>Set as background</caption>
                     <description>Whether the image is rendered as a background. More content can be put inside, while design properties will have no effect.</description>
                 </property>
                 <property key="children" type="widgets" required="false">
                     <caption>Place content here</caption>
                     <description />
                 </property>
+                <property key="resizeMode" type="enumeration" defaultValue="contain">
+                    <caption>Resize mode</caption>
+                    <description>Does not work for SVG's.</description>
+                    <enumerationValues>
+                        <enumerationValue key="cover">Cover</enumerationValue>
+                        <enumerationValue key="contain">Contain</enumerationValue>
+                        <enumerationValue key="stretch">Stretch</enumerationValue>
+                        <enumerationValue key="center">Center</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="opacity" type="integer" defaultValue="100">
+                    <caption>Opacity</caption>
+                    <description/>
+                </property>
             </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="Visibility"/>
+            <propertyGroup caption="Dimensions">
+                <property key="widthUnit" type="enumeration" defaultValue="auto">
+                    <caption>Width unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="auto">Auto</enumerationValue>
+                        <enumerationValue key="points">Points</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="customWidth" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="auto">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="auto">Auto</enumerationValue>
+                        <enumerationValue key="points">Points</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="customHeight" type="integer" defaultValue="100">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClickType" type="enumeration" defaultValue="action">
+                <caption>On click type</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="action">Action</enumerationValue>
+                    <enumerationValue key="enlarge">Enlarge</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="onClick" type="action" required="false">
+                <caption>On click</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Name"/>
+            <systemProperty key="Visibility"/>
         </propertyGroup>
     </properties>
 </widget>

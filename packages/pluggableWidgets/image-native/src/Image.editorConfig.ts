@@ -31,7 +31,7 @@ export function getProperties(values: ImagePreviewProps, defaultProperties: Prop
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
     if (values.datasource === "icon") {
-        hidePropertyIn(defaultProperties, values, "isBackgroundImage");
+        hidePropertiesIn(defaultProperties, values, ["isBackgroundImage", "children", "resizeMode", "opacity"]);
     }
 
     if (!values.isBackgroundImage) {
@@ -44,6 +44,16 @@ export function getProperties(values: ImagePreviewProps, defaultProperties: Prop
 
     if (values.onClickType !== "action") {
         hidePropertyIn(defaultProperties, values, "onClick");
+    }
+
+    if (!values.isBackgroundImage) {
+        hidePropertiesIn(defaultProperties, values, ["children", "resizeMode", "opacity"]);
+    }
+    if (values.widthUnit === "auto") {
+        hidePropertyIn(defaultProperties, values, "customWidth");
+    }
+    if (values.heightUnit === "auto") {
+        hidePropertyIn(defaultProperties, values, "customHeight");
     }
 
     return defaultProperties;

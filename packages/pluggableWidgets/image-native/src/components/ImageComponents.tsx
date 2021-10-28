@@ -1,5 +1,4 @@
 import { createElement, Dispatch, SetStateAction, FunctionComponent, useState, Fragment, useCallback } from "react";
-
 import { Modal, Pressable, LayoutChangeEvent, View } from "react-native";
 import { SvgUri } from "react-native-svg";
 import { OnClickTypeEnum } from "../../typings/ImageProps";
@@ -9,6 +8,8 @@ import { DimensionsType, ImageIconSVG } from "./ImageIconSVG";
 interface ImageViewerBaseProps {
     name?: string;
     source: CustomImageObjectProps;
+    customWidth?: number;
+    customHeight?: number;
     initialDimensions: DimensionsType | undefined;
     styles?: any; // FIXME: fix
 }
@@ -31,7 +32,17 @@ interface GetImageDimensionsComponentProps extends ImageViewerBaseProps {
 
 export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
     const [enlarged, setEnlarged] = useState(false);
-    const { source, initialDimensions, setInitialDimensions, onClick, onClickType, styles, name } = props;
+    const {
+        source,
+        initialDimensions,
+        setInitialDimensions,
+        customWidth,
+        customHeight,
+        onClick,
+        onClickType,
+        styles,
+        name
+    } = props;
 
     const onLayoutSetInitialDimensions = useCallback(
         ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
@@ -50,6 +61,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
             <ImageSmall
                 name={name}
                 source={source}
+                customWidth={customWidth}
+                customHeight={customHeight}
                 initialDimensions={initialDimensions}
                 onClick={onClickType === "enlarge" ? () => setEnlarged(true) : onClick}
                 styles={styles}
@@ -104,12 +117,22 @@ export const GetImageDimensionsComponent: FunctionComponent<GetImageDimensionsCo
 
 export const ImageSmall: FunctionComponent<ImageSmallProps> = props => {
     const [dimensions, setDimensions] = useState<DimensionsType>();
-    const { source, initialDimensions, onClick, styles, name } = props;
+    const { source, initialDimensions, customWidth, customHeight, onClick, styles, name } = props;
+
+    console.warn("width: " + customWidth);
+    console.warn("height: " + customHeight);
+    console.warn(initialDimensions);
+    console.warn(dimensions);
 
     const onLayoutSetDimensionsCallback = useCallback(
         ({ nativeEvent: { layout } }: LayoutChangeEvent) =>
-            onLayoutSetDimensions(layout.width, layout.height, setDimensions, initialDimensions),
-        [initialDimensions]
+            onLayoutSetDimensions(
+                customWidth ?? layout.width,
+                customHeight ?? layout.height,
+                setDimensions,
+                initialDimensions
+            ),
+        [initialDimensions, customWidth, customHeight]
     );
 
     return (

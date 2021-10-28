@@ -57,12 +57,23 @@ export const Image: FunctionComponent<ImageProps<Style>> = props => {
             source={source}
             onClick={onClick}
             onClickType={props.onClickType}
+            customWidth={props.widthUnit === "points" ? props.customWidth : undefined}
+            customHeight={props.heightUnit === "points" ? props.customHeight : undefined}
             initialDimensions={initialDimensions}
             setInitialDimensions={setInitialDimensions}
             styles={styles}
         />
     ) : (
-        <BackgroundImage name={props.name} source={source} initialDimensions={initialDimensions} styles={styles}>
+        <BackgroundImage
+            name={props.name}
+            source={source}
+            customWidth={props.widthUnit === "points" ? props.customWidth : undefined}
+            customHeight={props.heightUnit === "points" ? props.customHeight : undefined}
+            initialDimensions={initialDimensions}
+            resizeMode={props.resizeMode}
+            opacity={props.opacity}
+            styles={styles}
+        >
             {props.children}
         </BackgroundImage>
     );
